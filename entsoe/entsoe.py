@@ -23,6 +23,10 @@ __license__ = "MIT"
 
 URL = 'https://transparency.entsoe.eu/api'
 
+logFormatter = '%(name)s - %(asctime)s - %(levelname)s - %(message)s'
+logging.basicConfig(format=logFormatter, level=logging.DEBUG)
+logger = logging.getLogger("ENTSO-E API")
+
 
 class EntsoeRawClient:
     # noinspection LongLine
@@ -86,7 +90,7 @@ class EntsoeRawClient:
         }
         params.update(base_params)
 
-        logging.debug(f'Performing request to {URL} with params {params}')
+        logger.debug(f'Performing request to {URL} with params {params}')
         response = self.session.get(url=URL, params=params,
                                     proxies=self.proxies, timeout=self.timeout)
         try:
